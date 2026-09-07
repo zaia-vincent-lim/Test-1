@@ -1,0 +1,437 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #0d0d1a;
+  color: #eee;
+  font-family: system-ui, -apple-system, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding: 12px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ========== MAIN MENU ========== */
+#main-menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  width: 100%;
+}
+
+.menu-content {
+  text-align: center;
+  max-width: 520px;
+  width: 100%;
+}
+
+.game-title {
+  font-size: 2.4rem;
+  margin-bottom: 6px;
+  background: linear-gradient(135deg, #4a90d9, #e94560);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.menu-subtitle {
+  color: #777;
+  margin-bottom: 18px;
+  font-size: 0.95rem;
+}
+
+#unlocks-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.unlock-label {
+  color: #888;
+  font-size: 0.85rem;
+}
+
+#unlocked-towers {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.tower-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  background: #1a2a4e;
+  border: 1px solid #3a5a8a;
+}
+
+.tower-badge.locked-badge {
+  opacity: 0.4;
+  border-color: #333;
+}
+
+#stage-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.stage-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  background: #16213e;
+  border: 2px solid #2a3a5a;
+  border-radius: 10px;
+  color: #eee;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: all 0.15s ease;
+  text-align: left;
+  width: 100%;
+}
+
+.stage-btn:hover:not(:disabled) {
+  border-color: #4a90d9;
+  background: #1a2a4e;
+  transform: translateY(-1px);
+}
+
+.stage-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.stage-btn .stage-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.stage-btn .stage-title {
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.stage-btn .stage-desc {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+.stage-btn .stage-status {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.stage-btn .status-unlocked { color: #2ecc71; }
+.stage-btn .status-locked { color: #e94560; }
+.stage-btn .status-cleared { color: #f1c40f; }
+
+.menu-hint {
+  color: #555;
+  font-size: 0.8rem;
+  margin-bottom: 14px;
+}
+
+/* ========== GAME SCREEN ========== */
+#game-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+#top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 800px;
+  max-width: 100%;
+  margin-bottom: 8px;
+  gap: 10px;
+}
+
+#stage-name {
+  font-size: 1.05rem;
+  color: #4a90d9;
+  flex: 1;
+  text-align: center;
+}
+
+#ui {
+  display: flex;
+  gap: 14px;
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+#game-container {
+  position: relative;
+  border: 3px solid #4a4a6a;
+  border-radius: 8px;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+canvas {
+  display: block;
+  background: #16213e;
+  cursor: crosshair;
+  max-width: 100%;
+  height: auto;
+  touch-action: none;
+}
+
+#controls {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+button {
+  padding: 10px 18px;
+  background: #0f3460;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  min-height: 42px; /* touch friendly */
+}
+
+button:hover {
+  background: #1a4a8a;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: #2a2a4a;
+}
+
+.btn-secondary:hover {
+  background: #3a3a5a;
+}
+
+#message {
+  margin-top: 8px;
+  height: 22px;
+  color: #e94560;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+/* ========== Tower Picker ========== */
+#tower-picker {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(15, 20, 40, 0.96);
+  border: 2px solid #4a90d9;
+  border-radius: 12px;
+  padding: 12px 16px;
+  z-index: 15;
+  text-align: center;
+  min-width: 280px;
+}
+
+.picker-title {
+  font-size: 0.9rem;
+  color: #4a90d9;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+#tower-options {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.tower-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 12px;
+  background: #1a2a4e;
+  border: 2px solid #2a4a7a;
+  border-radius: 8px;
+  cursor: pointer;
+  min-width: 90px;
+  color: #eee;
+  font-size: 0.8rem;
+}
+
+.tower-option:hover {
+  border-color: #4a90d9;
+  background: #243a6e;
+}
+
+.tower-option .opt-name {
+  font-weight: 700;
+}
+
+.tower-option .opt-cost {
+  color: #f1c40f;
+}
+
+.tower-option .opt-desc {
+  color: #888;
+  font-size: 0.7rem;
+}
+
+/* ========== Upgrade Panel ========== */
+#upgrade-panel {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 220px;
+  background: rgba(15, 20, 40, 0.95);
+  border: 2px solid #4a90d9;
+  border-radius: 10px;
+  padding: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  z-index: 10;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 1rem;
+  color: #4a90d9;
+}
+
+#btn-close-panel {
+  background: transparent;
+  border: none;
+  color: #aaa;
+  font-size: 1.1rem;
+  padding: 0 4px;
+  line-height: 1;
+  cursor: pointer;
+  min-height: auto;
+}
+
+#btn-close-panel:hover {
+  color: #e94560;
+  background: transparent;
+}
+
+.panel-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 12px;
+  font-size: 0.85rem;
+  color: #ccc;
+}
+
+.panel-stats span {
+  color: #fff;
+  font-weight: 600;
+}
+
+.panel-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.panel-actions button {
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+}
+
+.panel-actions button.sell {
+  background: #5a2a2a;
+}
+
+.panel-actions button.sell:hover {
+  background: #8a3a3a;
+}
+
+/* ========== Overlays ========== */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+}
+
+.overlay-box {
+  background: #16213e;
+  border: 2px solid #4a90d9;
+  border-radius: 12px;
+  padding: 28px 36px;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  max-width: 90%;
+}
+
+.overlay-box h2 {
+  margin-bottom: 8px;
+  font-size: 1.5rem;
+}
+
+.overlay-box p {
+  color: #aaa;
+  margin-bottom: 8px;
+}
+
+.unlock-reward {
+  color: #f1c40f !important;
+  font-weight: 600;
+  margin-bottom: 16px !important;
+}
+
+.overlay-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+/* Mobile tweaks */
+@media (max-width: 600px) {
+  .game-title { font-size: 1.8rem; }
+  #top-bar { flex-wrap: wrap; }
+  #upgrade-panel { width: 180px; font-size: 0.85rem; }
+  .tower-option { min-width: 75px; padding: 8px; }
+}
