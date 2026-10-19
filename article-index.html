@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tabletop News Prototype</title>
+  <link rel="stylesheet" href="css/article-styles.css">
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <h1>🎲 <span>Tabletop</span> News</h1>
+      <div class="controls">
+        <div class="search-box">
+          <input type="search" id="search" placeholder="Search titles & summaries..." autocomplete="off">
+        </div>
+        <select id="sort">
+          <option value="newest">Newest first</option>
+          <option value="oldest">Oldest first</option>
+          <option value="title">Title A–Z</option>
+        </select>
+        <select id="source">
+          <option value="">All sources</option>
+        </select>
+        <button type="button" id="refresh-btn" class="btn-refresh" title="Refresh from Google Sheet">
+          ↻ Refresh
+        </button>
+        <div class="stats" id="stats">Loading…</div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div id="content" class="loading">Loading articles</div>
+    <div id="scroll-status" class="scroll-status" hidden></div>
+  </main>
+
+  <!-- Detail Modal -->
+  <div class="modal-overlay" id="modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 class="modal-title" id="modal-title"></h2>
+        <button class="modal-close" id="modal-close" aria-label="Close">×</button>
+      </div>
+      <div class="modal-meta" id="modal-meta"></div>
+      <div class="modal-body" id="modal-body"></div>
+      <div class="modal-actions">
+        <a class="btn-primary" id="modal-link" href="#" target="_blank" rel="noopener">
+          Open original article →
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts: data first, then application logic -->
+  <script src="js/article-data.js"></script>
+  <script src="js/article-app.js"></script>
+</body>
+</html>
