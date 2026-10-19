@@ -1,0 +1,13 @@
+/* Design tokens – change these to restyle the whole app */
+:root {
+  --bg: #0f1419;
+  --surface: #1a2332;
+  --surface-hover: #243044;
+  --border: #2d3a4f;
+  --text: #e7ecf3;
+  --text-muted: #9aa8bc;
+  --accent: #6c9eff;
+  --accent-hover: #8bb3ff;
+  --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+  --radius: 12px;
+}

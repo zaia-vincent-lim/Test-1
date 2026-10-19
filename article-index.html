@@ -4,7 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tabletop News Prototype</title>
-  <link rel="stylesheet" href="css/article-styles.css">
+
+  <!-- CSS components (order matters for cascade) -->
+  <link rel="stylesheet" href="css/article-variables.css">
+  <link rel="stylesheet" href="css/article-base.css">
+  <link rel="stylesheet" href="css/article-header.css">
+  <link rel="stylesheet" href="css/article-cards.css">
+  <link rel="stylesheet" href="css/article-modal.css">
+  <link rel="stylesheet" href="css/article-status.css">
 </head>
 <body>
   <header>
@@ -52,8 +59,14 @@
     </div>
   </div>
 
-  <!-- Scripts: data first, then application logic -->
+  <!-- JS components (order matters – data first, then config → helpers → features → app) -->
   <script src="js/article-data.js"></script>
+  <script src="js/article-config.js"></script>
+  <script src="js/article-helpers.js"></script>
+  <script src="js/article-render.js"></script>
+  <script src="js/article-filters.js"></script>
+  <script src="js/article-refresh.js"></script>
+  <script src="js/article-scroll.js"></script>
   <script src="js/article-app.js"></script>
 </body>
 </html>
